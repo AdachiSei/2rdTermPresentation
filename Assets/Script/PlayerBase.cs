@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(Rigidbody))]
 public class PlayerBase : MonoBehaviour
@@ -11,6 +12,8 @@ public class PlayerBase : MonoBehaviour
 
     Rigidbody _rb;
 
+    Vector2 _m;
+
     void Awake()
     {
         _rb = GetComponent<Rigidbody>();
@@ -20,13 +23,20 @@ public class PlayerBase : MonoBehaviour
     {
         Cursor.lockState = CursorLockMode.Locked;
 
-        Move();
+        OnMove();
     }
 
-    void Move()
+    void OnMove()
     {
-        float h = Input.GetAxis("Mouse X");
-        float v = Input.GetAxis("Mouse Y");
-        _rb.velocity = new Vector3(h,0f,v) * _speed;
+        //float h = Input.GetAxis("Mouse X");
+        //float v = Input.GetAxis("Mouse Y");
+        //_rb.velocity = new Vector3(_m.x,0f,_m.y) * _speed;
+        _rb.AddForce(new Vector3(_m.x, 0f, _m.y) * _speed);
+    }
+
+    public void Move(InputAction.CallbackContext context)
+    {
+         _m = context.ReadValue<Vector2>();
+        Debug.Log(_m);
     }
 }
