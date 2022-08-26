@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(Rigidbody))]
 public class PlayerBase : MonoBehaviour
@@ -11,7 +10,6 @@ public class PlayerBase : MonoBehaviour
     float _speed = 5;
 
     Rigidbody _rb;
-    Vector2 _m;
 
     void Awake()
     {
@@ -26,27 +24,27 @@ public class PlayerBase : MonoBehaviour
 
     void OnMove()
     {
-        //float h = Input.GetAxis("Mouse X");
-        //float v = Input.GetAxis("Mouse Y");
-        _rb.velocity = new Vector3(_m.x,0f,_m.y) * _speed;
         //_rb.AddForce(new Vector3(_m.x, 0f, _m.y) * _speed);
+        float h = Input.GetAxis("Mouse X");
+        float v = Input.GetAxis("Mouse Y");
+        _rb.velocity = new Vector3(h,0f,v) * _speed;
     }
     
-    public void Move(InputAction.CallbackContext context)
-    {
-        _m = context.ReadValue<Vector2>();
-        Debug.Log(_m);
-    }
+    //public void Move(InputAction.CallbackContext context)
+    //{
+    //    _m = context.ReadValue<Vector2>();
+    //    Debug.Log(_m);
+    //}
 
-    public void MoveForMouse(InputAction.CallbackContext context)
-    {
-        _m = context.ReadValue<Vector2>() / 25;
-        Debug.Log(_m);
-    }
+    //public void MoveForMouse(InputAction.CallbackContext context)
+    //{
+    //    _m = context.ReadValue<Vector2>() / 25;
+    //    Debug.Log(_m);
+    //}
 
-    public void MoveForJoycon(InputAction.CallbackContext context)
-    {
-        _m = context.ReadValue<Vector2>() / 25;
-        Debug.Log(_m);
-    }
+    //public void MoveForJoycon(InputAction.CallbackContext context)
+    //{
+    //    _m = context.ReadValue<Vector2>() / 25;
+    //    Debug.Log(_m);
+    //}
 }
