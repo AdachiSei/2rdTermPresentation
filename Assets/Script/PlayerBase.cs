@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// PlayerÇêßå‰Ç∑ÇÈäÓíÍÉNÉâÉX
+/// </summary>
 [RequireComponent(typeof(Rigidbody))]
 public class PlayerBase : MonoBehaviour
 {
@@ -14,9 +17,9 @@ public class PlayerBase : MonoBehaviour
     float _speed = 15;
 
     Rigidbody _rb;
-
     string _hName;
     string _vName;
+    bool _isPlay = true;
     
     const string HORIZONTAL = "Horizontal";
     const string VERTICAL = "Vertical";
@@ -26,6 +29,9 @@ public class PlayerBase : MonoBehaviour
     protected virtual void Awake()
     {
         _rb = GetComponent<Rigidbody>();
+        PauseManager.Instance.OnPause += () => OnPause();
+        PauseManager.Instance.OnResume += () => OnResume();
+
         switch(_playerType)
         {
             case PlayerType.Player1:
@@ -44,9 +50,11 @@ public class PlayerBase : MonoBehaviour
 
     protected virtual void Update()
     {
-        Cursor.lockState = CursorLockMode.Locked;
-
-        Move();
+        if(_isPlay)
+        {
+            //Cursor.lockState = CursorLockMode.Locked;
+            Move();
+        }
     }
 
     protected virtual void Move()
@@ -54,6 +62,19 @@ public class PlayerBase : MonoBehaviour
         float h = Input.GetAxisRaw(_hName);
         float v = Input.GetAxisRaw(_vName);
         _rb.velocity = new Vector3(h, 0f, v).normalized * _speed;
+    }
+
+    void OnPause()
+    {
+        _isPlay = false;
+        _rb.constraints = RigidbodyConstraints.FreezePosition;
+        Cursor.lockState = CursorLockMode.Confined;
+    }
+
+    void OnResume()
+    {
+        _isPlay = true;
+        _rb.constraints = RigidbodyConstraints.FreezePositionY | RigidbodyConstraints.FreezeRotation;
     }
 
     //void MoveForMouse()
