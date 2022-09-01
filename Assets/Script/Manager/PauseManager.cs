@@ -12,17 +12,17 @@ public class PauseManager : SingletonMonoBehaviour<PauseManager>
 
     const string CANCEL = "Cancel";
 
-    protected override void Awake()
-    {
-        base.Awake();
-
-    }
-
     void Update()
     {
         if (Input.GetButtonDown(CANCEL))
         {
-            switch (_isPause)
+            Pause();
+        }
+    }
+
+    void Pause()
+    {
+        switch (_isPause)
             {
                 case false:
                     OnPause.Invoke();
@@ -33,6 +33,5 @@ public class PauseManager : SingletonMonoBehaviour<PauseManager>
                     _isPause = false;
                     break;
             }
-        }
     }
 }

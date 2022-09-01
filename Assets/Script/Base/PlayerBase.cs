@@ -14,7 +14,7 @@ public class PlayerBase : MonoBehaviour
 
     [SerializeField]
     [Header("スピード")]
-    float _speed = 15;
+    float _speed = 20;
 
     Rigidbody _rb;
     string _hName;
@@ -76,30 +76,4 @@ public class PlayerBase : MonoBehaviour
         _isPlay = true;
         _rb.constraints = RigidbodyConstraints.FreezePositionY | RigidbodyConstraints.FreezeRotation;
     }
-
-    //void MoveForMouse()
-    //{
-    //    //_rb.AddForce(new Vector3(_m.x, 0f, _m.y) * _speed);
-    //    float h = Input.GetAxis("Mouse X");
-    //    float v = Input.GetAxis("Mouse Y");
-    //    _rb.velocity = new Vector3(h,0f,v) * _speed;
-    //}
-
-    //public void Move(InputAction.CallbackContext context)
-    //{
-    //    _m = context.ReadValue<Vector2>();
-    //    Debug.Log(_m);
-    //}
-
-    //public void MoveForMouse(InputAction.CallbackContext context)
-    //{
-    //    _m = context.ReadValue<Vector2>() / 25;
-    //    Debug.Log(_m);
-    //}
-
-    //public void MoveForJoycon(InputAction.CallbackContext context)
-    //{
-    //    _m = context.ReadValue<Vector2>() / 25;
-    //    Debug.Log(_m);
-    //}
 }

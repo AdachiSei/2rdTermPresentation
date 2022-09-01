@@ -6,7 +6,6 @@ using UnityEngine;
 public class PackController : MonoBehaviour
 {
     Rigidbody _rb;
-
     Vector3 _velocity;
     Vector3 _angularVelocity;
 
@@ -16,6 +15,30 @@ public class PackController : MonoBehaviour
         PauseManager.Instance.OnPause += () => OnPause();
         PauseManager.Instance.OnResume += () => OnResume();
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        switch (other.gameObject.name)
+        {
+            case "Player1LGoal":
+                Debug.Log(111);
+                break;
+
+            case "Player2RGoal":
+                Debug.Log(111);
+                break;
+
+            case "Player1LWall":
+                Debug.Log(111);
+                break;
+
+            case "Player2RWall":
+                Debug.Log(111);
+                break;
+        }
+        Debug.Log("a");
+    }
+
 
     void OnPause()
     {
