@@ -5,7 +5,7 @@ using UnityEngine.UI;
 using UnityEngine.Events;
 
 
-public class ViewManager : MonoBehaviour
+public class BattleViewManager : MonoBehaviour
 {
     [SerializeField]
     Button _button;

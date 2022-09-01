@@ -10,14 +10,17 @@ public class PauseManager : SingletonMonoBehaviour<PauseManager>
 
     bool _isPause;
 
-    void Start()
+    const string CANCEL = "Cancel";
+
+    protected override void Awake()
     {
-        
+        base.Awake();
+
     }
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetButtonDown(CANCEL))
         {
             switch (_isPause)
             {

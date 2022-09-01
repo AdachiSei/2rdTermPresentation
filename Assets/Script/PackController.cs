@@ -7,7 +7,8 @@ public class PackController : MonoBehaviour
 {
     Rigidbody _rb;
 
-    Vector3 _vector3;
+    Vector3 _velocity;
+    Vector3 _angularVelocity;
 
     void Start()
     {
@@ -18,14 +19,16 @@ public class PackController : MonoBehaviour
 
     void OnPause()
     {
-        _vector3 = _rb.velocity;
-        _rb.constraints = RigidbodyConstraints.FreezePosition;
+        _velocity = _rb.velocity;
+        _angularVelocity = _rb.angularVelocity;
+        _rb.constraints = RigidbodyConstraints.FreezeAll;
         Cursor.lockState = CursorLockMode.Confined;
     }
 
     void OnResume()
     {
         _rb.constraints = RigidbodyConstraints.FreezePositionY | RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
-        _rb.velocity = _vector3;
+        _rb.velocity = _velocity;
+        _rb.angularVelocity = _angularVelocity;
     }
 }
