@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Events;
-
+using System.Threading.Tasks;
 
 public class BattleView : MonoBehaviour
 {
@@ -15,18 +15,19 @@ public class BattleView : MonoBehaviour
     [Header("プレイヤー2の所持ポイントのテキスト")]
     Text _p2PointText;
 
+    [SerializeField]
+    [Header("2人のポイントのテキスト")]
+    Text _vsText;
+
+    const int ONE_SECOND = 1000;
 
     void Awake()
     {
-        
+        _p1PointText.text = "0";
+        _p2PointText.text = "0";
     }
 
-    void Update()
-    {
-        
-    }
-
-    public void PointText(int point,PlayerType type)
+    public async void PointText(int point,PlayerType type)
     {
         switch (type)
         {
@@ -37,5 +38,13 @@ public class BattleView : MonoBehaviour
                 _p2PointText.text = point.ToString();
                 break;
         }
+
+        if(point != 0)
+        {
+            _vsText.text = _p1PointText.text + " VS " + _p2PointText.text;
+            _vsText.gameObject.SetActive(true);
+            await Task.Delay(ONE_SECOND);
+            _vsText.gameObject.SetActive(false);
+        }    
     }
 }

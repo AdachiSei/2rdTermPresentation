@@ -16,31 +16,43 @@ public class PlayerBase : MonoBehaviour
     [Header("スピード")]
     float _speed = 20;
 
+    [SerializeField]
+    [Header("精密時のスピード")]
+    float _slowSpeed = 3;
+
     Rigidbody _rb;
     string _hName;
     string _vName;
+    string _slowName;
     bool _isPlay = true;
+    KeyCode _slowKey;
     
     const string HORIZONTAL = "Horizontal";
     const string VERTICAL = "Vertical";
     const string HORIZONTAL2 = "Horizontal2";
     const string VERTICAL2 = "Vertical2";
+    const string SLOW = "Slow";
+    const string SLOW2 = "Slow2";
 
     protected virtual void Awake()
     {
         _rb = GetComponent<Rigidbody>();
-        PauseManager.Instance.OnPause += () => OnPause();
-        PauseManager.Instance.OnResume += () => OnResume();
+        PauseManager.Instance.OnPause += OnPause;
+        PauseManager.Instance.OnResume += OnResume;
 
         switch(_playerType)
         {
             case PlayerType.Player1:
                 _hName = HORIZONTAL;
                 _vName = VERTICAL;
+                //_slowKey = KeyCode.LeftShift;
+                _slowName = SLOW;
                 break;
             case PlayerType.Player2:
                 _hName = HORIZONTAL2;
                 _vName = VERTICAL2;
+                //_slowKey = KeyCode.Keypad0;
+                _slowName = SLOW2;
                 break;
             default:
                 Debug.Log("プレイヤーのタイプを設定してください");
@@ -61,7 +73,15 @@ public class PlayerBase : MonoBehaviour
     {
         float h = Input.GetAxisRaw(_hName);
         float v = Input.GetAxisRaw(_vName);
-        _rb.velocity = new Vector3(h, 0f, v).normalized * _speed;
+
+        if(Input.GetButton(_slowName))
+        {
+            _rb.velocity = new Vector3(h, 0f, v).normalized * _slowSpeed;
+        }
+        else
+        {
+            _rb.velocity = new Vector3(h, 0f, v).normalized * _speed;
+        }
     }
 
     void OnPause()
