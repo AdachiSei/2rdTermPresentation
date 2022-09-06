@@ -19,7 +19,18 @@ public class BattleView : MonoBehaviour
     [Header("2人のポイントのテキスト")]
     Text _vsText;
 
+    [SerializeField]
+    [Header("勝者のテキスト")]
+    Text _winnerText;
+
+    [SerializeField]
+    [Header("結果のパネル")]
+    Image _resultPanel;
+
     const int ONE_SECOND = 1000;
+    const string PLAYER1 = "プレイヤー1";
+    const string PLAYER2 = "プレイヤー2";
+    const string WINEER = "の勝利";
 
     void Awake()
     {
@@ -46,5 +57,26 @@ public class BattleView : MonoBehaviour
             await Task.Delay(ONE_SECOND);
             _vsText.gameObject.SetActive(false);
         }    
+    }
+
+    public async void PlayerWinner(PlayerType type)
+    {
+        switch (type)
+        {
+            case PlayerType.Empty:
+                return;
+            case PlayerType.Player1:
+                _winnerText.text = PLAYER1 + WINEER;
+                break;
+            case PlayerType.Player2:
+                _winnerText.text = PLAYER2 + WINEER;
+                break;
+        }
+
+        await Task.Delay(ONE_SECOND);
+        _winnerText.gameObject.SetActive(true);
+        await Task.Delay(ONE_SECOND);
+        _winnerText.gameObject.SetActive(false);
+        _resultPanel.gameObject.SetActive(true);
     }
 }

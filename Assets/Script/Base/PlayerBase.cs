@@ -20,12 +20,23 @@ public class PlayerBase : MonoBehaviour
     [Header("精密時のスピード")]
     float _slowSpeed = 3;
 
+    [SerializeField]
+    [Header("パック")]
+    PackController _packController;
+
+    [SerializeField]
+    [Header("プレイヤー1の定位置")]
+    Vector3 _player1Pos = new Vector3(-7f,0.15f,-3);
+
+    [SerializeField]
+    [Header("プレイヤー2の定位置")]
+    Vector3 _player2Pos = new Vector3(7f, 0.15f, 3);
+
     Rigidbody _rb;
     string _hName;
     string _vName;
     string _slowName;
     bool _isPlay = true;
-    KeyCode _slowKey;
     
     const string HORIZONTAL = "Horizontal";
     const string VERTICAL = "Vertical";
@@ -62,11 +73,24 @@ public class PlayerBase : MonoBehaviour
 
     protected virtual void Update()
     {
-        if(_isPlay)
+        if(_packController.gameObject.activeSelf == false)
+        {
+            switch (_playerType)
+            {
+                case PlayerType.Player1:
+                    _rb.velocity = (_player1Pos - gameObject.transform.position) * _slowSpeed;
+                    break;
+                case PlayerType.Player2:
+                    _rb.velocity = (_player2Pos - gameObject.transform.position) * _slowSpeed;
+                    break;
+            }
+        }
+        else if(_isPlay)
         {
             //Cursor.lockState = CursorLockMode.Locked;
             Move();
         }
+        
     }
 
     protected virtual void Move()

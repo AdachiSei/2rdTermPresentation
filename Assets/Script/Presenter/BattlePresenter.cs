@@ -22,5 +22,10 @@ public class BattlePresenter : MonoBehaviour
         {
             _battleView.PointText(point, PlayerType.Player2);
         }).AddTo(this);
+
+        _battleModel.Judg.Subscribe(playerType =>
+        {
+            _battleView.PlayerWinner(playerType);
+        }).AddTo(this);
     }
 }

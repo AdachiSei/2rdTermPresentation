@@ -21,7 +21,7 @@ public class PackController : MonoBehaviour
     PlayerType _endGoal;
 
     const int ONE_SECOND = 1000;
-    const int ZERO_P_FIVE_SECONDS = 500;
+    const int ZERO_P_THREE_SECONDS = 300;
     const float PACK_HEIGHT = 0.121f;
     const float PACK_DEPTH = 5f;
     const float ONE = 1f;
@@ -48,20 +48,20 @@ public class PackController : MonoBehaviour
                 break;
         }
 
-        await Task.Delay(ZERO_P_FIVE_SECONDS);
+        await Task.Delay(ZERO_P_THREE_SECONDS);
         _collider.isTrigger = false;    
     }
 
     async void OnDisable()
-    {
+    { 
         _velocity = Vector3.zero;
         _angularVelocity = Vector3.zero;
         _rb.velocity = Vector3.zero;
         _rb.angularVelocity = Vector3.zero;
         _collider.isTrigger = true;
         await Task.Delay(ONE_SECOND);
+        if (_battleModel.Judg.Value != PlayerType.Empty) return;
         gameObject.SetActive(true);
-
     }
 
     void OnTriggerEnter(Collider other)
@@ -78,7 +78,7 @@ public class PackController : MonoBehaviour
                     _endGoal = PlayerType.Player2;
                     _battleModel.PlusPoint(PlayerType.Player2);
                     break;
-            }
+            }       
         }
     }
 
