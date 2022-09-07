@@ -8,6 +8,10 @@ using UnityEngine;
 /// <typeparam name="T"></typeparam>
 public class SingletonMonoBehaviour<T> : MonoBehaviour where T : MonoBehaviour
 {
+    [SerializeField]
+    [Header("ƒV[ƒ“‚ªˆÚ“®‚µ‚Ä‚à•Û‚·‚é‚©")]
+    bool _isDontDestroy;
+
     public static T Instance
     {
         get
@@ -28,8 +32,12 @@ public class SingletonMonoBehaviour<T> : MonoBehaviour where T : MonoBehaviour
 
     static T _instance;
 
-    virtual protected void Awake() =>
+    virtual protected void Awake()
+    {
+        if(_isDontDestroy) DontDestroyOnLoad(this);
+
         CheckInstance();
+    }
 
     protected bool CheckInstance()
     {
