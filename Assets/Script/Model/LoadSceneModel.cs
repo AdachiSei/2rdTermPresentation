@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class SceneLoader : SingletonMonoBehaviour<SceneLoader>
+public class LoadSceneModel : MonoBehaviour
 {
     public void LoadScene(string name)
     {
