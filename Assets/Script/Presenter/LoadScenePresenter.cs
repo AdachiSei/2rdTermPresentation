@@ -1,18 +1,42 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UniRx;
+using UnityEngine.UI;
 
 public class LoadScenePresenter : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    [SerializeField]
+    [Header("ロードシーンモデル")]
+    LoadSceneModel _loadSceneModel;
 
-    // Update is called once per frame
-    void Update()
+    [SerializeField]
+    [Header("リプレイボタン")]
+    Button _replayButton;
+
+    [SerializeField]
+    [Header("セレクトボタン")]
+    Button _selectButton;
+
+    [SerializeField]
+    [Header("タイトルへ戻るボタン")]
+    Button _backToTitleButton;
+
+    void Awake()
     {
-        
+        _replayButton.OnClickAsObservable().Subscribe(x =>
+        {
+            _loadSceneModel.LoadScene(SceneType.BattleScene);
+        }).AddTo(this);
+
+        _selectButton.OnClickAsObservable().Subscribe(x =>
+        {
+            _loadSceneModel.LoadScene(SceneType.SelectScene);
+        }).AddTo(this);
+
+        _backToTitleButton.OnClickAsObservable().Subscribe(x =>
+        {
+            _loadSceneModel.LoadScene(SceneType.TitleScene);
+        }).AddTo(this);
     }
 }

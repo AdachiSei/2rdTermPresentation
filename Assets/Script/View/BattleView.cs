@@ -24,8 +24,8 @@ public class BattleView : MonoBehaviour
     Text _winnerText;
 
     [SerializeField]
-    [Header("結果のパネル")]
-    Image _resultPanel;
+    [Header("ポーズのパネル")]
+    Image _pausePanel;
 
     const int ONE_SECOND = 1000;
     const string PLAYER1 = "プレイヤー1";
@@ -77,6 +77,6 @@ public class BattleView : MonoBehaviour
         _winnerText.gameObject.SetActive(true);
         await Task.Delay(ONE_SECOND);
         _winnerText.gameObject.SetActive(false);
-        _resultPanel.gameObject.SetActive(true);
+        _pausePanel.gameObject.SetActive(true);
     }
 }

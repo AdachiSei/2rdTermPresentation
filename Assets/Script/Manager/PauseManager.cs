@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PauseManager : SingletonMonoBehaviour<PauseManager>
 {
@@ -11,6 +12,10 @@ public class PauseManager : SingletonMonoBehaviour<PauseManager>
     [SerializeField]
     [Header("パック")]
     PackController _packController;
+
+    [SerializeField]
+    [Header("ポーズパネル")]
+    Image _pausePanel;
 
     bool _isPause;
 
@@ -30,10 +35,12 @@ public class PauseManager : SingletonMonoBehaviour<PauseManager>
         {
             case false:
                 OnPause.Invoke();
+                _pausePanel.gameObject.SetActive(true);
                 _isPause = true;
                 break;
             case true:
                 OnResume.Invoke();
+                _pausePanel.gameObject.SetActive(false);
                 _isPause = false;
                 break;
         }
