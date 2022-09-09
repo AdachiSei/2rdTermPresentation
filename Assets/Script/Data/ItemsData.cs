@@ -16,7 +16,7 @@ public class ItemsData : ScriptableObject
     public class ItemData
     {
         public string Name => _name;
-        public ItemType Type => _type;
+        public SmasherType Type => _type;
         public string Explain => _explain;
         public int Rarity => _rarity;
         public int Price => _price;
@@ -27,7 +27,7 @@ public class ItemsData : ScriptableObject
 
         [SerializeField]
         [Tooltip("アイテムの種類")]
-        ItemType _type;
+        SmasherType _type;
 
         [SerializeField]
         [Tooltip("アイテムの説明文")]

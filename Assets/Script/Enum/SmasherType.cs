@@ -2,9 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum ItemType
+public enum SmasherType
 {
-    NoData,
-    HealItem,
-    DetoxifyItem
+    Normal,
+    Heavy,
+    speed,
+    Range
 }
