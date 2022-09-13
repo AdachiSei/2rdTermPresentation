@@ -4,7 +4,7 @@ using UnityEngine;
 using UniRx;
 using UnityEngine.UI;
 
-public class LoadScenePresenter : MonoBehaviour
+public class BattleLoadScenePresenter : MonoBehaviour
 {
     [SerializeField]
     [Header("ロードシーンモデル")]
