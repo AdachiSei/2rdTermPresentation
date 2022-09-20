@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.Linq;
 
-public class ChangeUIManager : SingletonMonoBehaviour<ChangeUIManager>
+public class ChangeUIManager : MonoBehaviour
 {
     [SerializeField]
     [Header("テキストが流れるスピード")]
@@ -13,7 +13,7 @@ public class ChangeUIManager : SingletonMonoBehaviour<ChangeUIManager>
 
     [SerializeField]
     [Header("全てのUI")]
-    List<UIs> _allUI = new List<UIs>();
+    List<Booths> _booths = new List<Booths>();
 
     [SerializeField]
     [Header("所持金のテキスト")]
@@ -39,51 +39,52 @@ public class ChangeUIManager : SingletonMonoBehaviour<ChangeUIManager>
     void Start() 
     {
         //場所テキストの名前を変更
-        _boothNameText.text = _allUI.FirstOrDefault(x => x.BoothType == BoothType.Home).BoothName;
+        _boothNameText.text = _booths.FirstOrDefault(x => x.BoothType == BoothType.Home).BoothName;
         //現在のブースタイプを保存
         _boothTypes.Push(BoothType.Home);
-        StartCoroutine(Explain(_allUI.FirstOrDefault(x => x.BoothType == BoothType.Home).Message));
+        StartCoroutine(Explain(_booths.FirstOrDefault(x => x.BoothType == BoothType.Home).Message));
     }
 
     /// <summary>ショップメニューを表示</summary>
-    public void NextMenu(BoothType boothType)
-    {
-        //次のUIを表示する
-        _allUI.First(x => x.BoothType == boothType).SetActive(true);
-        //前のUIを非表示する
-        _allUI.First(x => x.BoothType == _boothTypes.Peek()).SetActive(false);
-        //現在の状態(移動した後の)を保存
-        _boothTypes.Push(boothType);
-        //下の説明テキストを変更
-        StopAllCoroutines();
-        StartCoroutine(Explain(_allUI.FirstOrDefault(x => x.BoothType == _boothTypes.Peek()).Message));
-        //場所テキストの名前を変更
-        _boothNameText.text = _allUI.FirstOrDefault(x => x.BoothType == boothType).BoothName;
-        _isFirst = true;
+    public void NextMenu(/*BoothType boothType*/)
+    { 
+        //Debug.Log(boothType);
+        ////次のUIを表示する
+        //_booths.First(x => x.BoothType == boothType).SetActive(true);
+        ////前のUIを非表示する
+        //_booths.First(x => x.BoothType == _boothTypes.Peek()).SetActive(false);
+        ////現在の状態(移動した後の)を保存
+        //_boothTypes.Push(boothType);
+        ////下の説明テキストを変更
+        //StopAllCoroutines();
+        //StartCoroutine(Explain(_booths.FirstOrDefault(x => x.BoothType == _boothTypes.Peek()).Message));
+        ////場所テキストの名前を変更
+        //_boothNameText.text = _booths.FirstOrDefault(x => x.BoothType == boothType).BoothName;
+        //_isFirst = true;
     }
 
     /// <summary>戻る</summary>
     public void BackMenu()
     {
         //今のUIを非表示する
-        _allUI.FirstOrDefault(x => x.BoothType == _boothTypes.Peek()).SetActive(false);
+        _booths.FirstOrDefault(x => x.BoothType == _boothTypes.Peek()).SetActive(false);
         //今のUIの要素も消す
         if(_boothTypes.Peek() != BoothType.Home)_boothTypes.Pop();
         //前のUIを表示
-        _allUI.FirstOrDefault(x => x.BoothType == _boothTypes.Peek()).SetActive(true);
+        _booths.FirstOrDefault(x => x.BoothType == _boothTypes.Peek()).SetActive(true);
 
         //下の説明テキストを変更
         if(_isFirst)
         {
             StopAllCoroutines();
-            StartCoroutine(Explain(_allUI.FirstOrDefault(x => x.BoothType == _boothTypes.Peek()).Message));
+            StartCoroutine(Explain(_booths.FirstOrDefault(x => x.BoothType == _boothTypes.Peek()).Message));
         }
         if (_boothTypes.Peek() == BoothType.Home)
         {
             _isFirst = false;
         }
         //場所テキストの名前を変更
-        _boothNameText.text = _allUI.FirstOrDefault(x => x.BoothType == _boothTypes.Peek()).BoothName;
+        _boothNameText.text = _booths.FirstOrDefault(x => x.BoothType == _boothTypes.Peek()).BoothName;
     }
 
     /// <summary>テキストを1文字ずつ時間差で表示する</summary>
@@ -94,13 +95,13 @@ public class ChangeUIManager : SingletonMonoBehaviour<ChangeUIManager>
         //一文字ずつ表示
         for(var t = 0; t < text.Length; t++)
         {
-            _explainText.text += _allUI.FirstOrDefault(x => x.BoothType == _boothTypes.Peek()).Message[t];
+            _explainText.text += _booths.FirstOrDefault(x => x.BoothType == _boothTypes.Peek()).Message[t];
             yield return new WaitForSeconds(_speed);
         }
     }
 
     [System.Serializable]
-    public class UIs
+    public class Booths
     {
         public BoothType BoothType => _boothType;
         public string BoothName => _boothName;

@@ -7,6 +7,10 @@ using UnityEngine.Events;
 public class NextBoothView : MonoBehaviour
 {
     [SerializeField]
+    [Header("UIManager")]
+    ChangeUIManager _changeUIManager;
+
+    [SerializeField]
     [Header("次のブースに行くためのButton")]
     List<NextBooth> _nextBooth = new();
 
@@ -21,12 +25,11 @@ public class NextBoothView : MonoBehaviour
             button
                 .NextBoothButton
                 .onClick
-                .AddListener(() =>ChangeUIManager
-                .Instance
-                .NextMenu(button.BoothType));
+                .AddListener(() => _changeUIManager
+                .NextMenu(/*button.BoothType*/));
         }
 
-        _backBooth.onClick.AddListener(ChangeUIManager.Instance.BackMenu);
+        _backBooth.onClick.AddListener(_changeUIManager.BackMenu);
     }
 
     [System.Serializable]

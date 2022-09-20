@@ -14,8 +14,8 @@ public class ButtonSupporter : MonoBehaviour
     //[Header("アイテムのタイプ(ショップのボタン用)")]
     //ItemType _itemType;
 
-    public void NextMenu() => ChangeUIManager.Instance.NextMenu(_boothType);
-    public void BackMenu() => ChangeUIManager.Instance.BackMenu();
+    //public void NextMenu() => ChangeUIManager.Instance.NextMenu(/*_boothType*/);
+    //public void BackMenu() => ChangeUIManager.Instance.BackMenu();
     //public void ShopItemExplain() => HomeUIManager.Instance.ShopItemExplain(_itemType);
     //public void ShopItemExplainSetActive(bool _active) => HomeUIManager.Instance.ShopItemExplainSetActive(_active);
     //public void ShopItemIsBuy() => HomeUIManager.Instance.ShopItemIsBuy(_itemType);
