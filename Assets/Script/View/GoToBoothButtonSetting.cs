@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Events;
 
-public class NextBoothView : MonoBehaviour
+public class GoToBoothButtonSetting : MonoBehaviour
 {
     [SerializeField]
     [Header("UIManager")]
@@ -26,7 +26,7 @@ public class NextBoothView : MonoBehaviour
                 .NextBoothButton
                 .onClick
                 .AddListener(() => _changeUIManager
-                .NextMenu(/*button.BoothType*/));
+                .NextMenu(button.BoothType));
         }
 
         _backBooth.onClick.AddListener(_changeUIManager.BackMenu);

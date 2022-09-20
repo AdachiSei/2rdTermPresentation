@@ -2,7 +2,6 @@ public enum SceneType
 {
     Empty,
     TitleScene,
-    SelectScene,
-    ShopScene,
+    HomeScene,
     BattleScene
 }
