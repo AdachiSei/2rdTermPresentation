@@ -7,6 +7,10 @@ using UnityEngine;
 public class PackController : MonoBehaviour
 {
     [SerializeField]
+    [Header("ポーズマネージャー")]
+    PauseManager _pauseManager;
+
+    [SerializeField]
     [Header("バトルモデル")]
     BattleModel _battleModel;
 
@@ -30,8 +34,8 @@ public class PackController : MonoBehaviour
     {
         _rb = GetComponent<Rigidbody>();
         _collider = GetComponent<Collider>();
-        PauseManager.Instance.OnPause += OnPause;
-        PauseManager.Instance.OnResume += OnResume;
+        _pauseManager.OnPause += OnPause;
+        _pauseManager.OnResume += OnResume;
     }
 
     async private void OnEnable()
@@ -61,7 +65,11 @@ public class PackController : MonoBehaviour
         _collider.isTrigger = true;
         await Task.Delay(ONE_SECOND);
         if (_battleModel.Judg.Value != PlayerType.Empty) return;
-        gameObject.SetActive(true);
+        try
+        {
+            gameObject.SetActive(true);
+        }
+        catch (System.Exception){}
     }
 
     void OnTriggerEnter(Collider other)
@@ -92,7 +100,11 @@ public class PackController : MonoBehaviour
 
     void OnResume()
     {
-        _rb.constraints = RigidbodyConstraints.FreezePositionY | RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
+        var rbConstraints = 
+            RigidbodyConstraints.FreezePositionY
+            | RigidbodyConstraints.FreezeRotationX
+            | RigidbodyConstraints.FreezeRotationZ;
+        _rb.constraints = rbConstraints;
         _rb.velocity = _velocity;
         _rb.angularVelocity = _angularVelocity;
     }

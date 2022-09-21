@@ -6331,6 +6331,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58d5909baa752ed45b072253e9961529, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _pauseManager: {fileID: 1874059232}
   _battleModel: {fileID: 363545797}
   _speed: 3
 --- !u!43 &186310595
@@ -6532,10 +6533,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a515443046615614ebad3f8df0aa123a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _pauseManager: {fileID: 1874059232}
   _playerType: 1
-  _speed: 20
-  _slowSpeed: 10
   _packController: {fileID: 147772195}
+  _speed: 15
+  _slowSpeed: 15
   _player1Pos: {x: -7, y: 0.15, z: -3}
   _player2Pos: {x: 7, y: 0.15, z: 3}
 --- !u!54 &221255492
@@ -12840,7 +12842,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: "\u30EB\u30FC\u30EB\u3092\u5909\u3048\u308B"
+  m_Text: "\u30DB\u30FC\u30E0\u306B\u623B\u308B"
 --- !u!222 &402403641
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -13543,7 +13545,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh26322
+  m_Name: pb_Mesh47496
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -20501,10 +20503,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a515443046615614ebad3f8df0aa123a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _pauseManager: {fileID: 1874059232}
   _playerType: 2
-  _speed: 20
-  _slowSpeed: 10
   _packController: {fileID: 147772195}
+  _speed: 15
+  _slowSpeed: 15
   _player1Pos: {x: -7, y: 0.15, z: -3}
   _player2Pos: {x: 7, y: 0.15, z: 3}
 --- !u!54 &919662721
@@ -21055,7 +21058,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh29640
+  m_Name: pb_Mesh47334
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -21887,10 +21890,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ecd5af8f49e4f7b49a8e2265dc5dd9f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _loadSceneModel: {fileID: 1478881947}
-  _replayButton: {fileID: 1967741057}
-  _selectButton: {fileID: 1455606312}
-  _backToTitleButton: {fileID: 917037067}
+  _sceneLoader: {fileID: 1478881947}
+  _buttons:
+  - _name: "\u30EA\u30D7\u30EC\u30A4"
+    _type: 3
+    _button: {fileID: 1967741057}
+  - _name: "\u30DB\u30FC\u30E0"
+    _type: 2
+    _button: {fileID: 1455606312}
+  - _name: "\u30BF\u30A4\u30C8\u30EB"
+    _type: 1
+    _button: {fileID: 917037067}
 --- !u!4 &1228130413
 Transform:
   m_ObjectHideFlags: 0
@@ -22598,7 +22608,7 @@ GameObject:
   - component: {fileID: 1455606313}
   - component: {fileID: 1455606312}
   m_Layer: 5
-  m_Name: RuleButton
+  m_Name: HomeButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -24457,7 +24467,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e25cdb78646a3ad4594408e392d2c59f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _isDontDestroy: 0
   _packController: {fileID: 147772195}
   _pausePanel: {fileID: 63615587}
 --- !u!4 &1874059233
@@ -24481,7 +24490,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh26140
+  m_Name: pb_Mesh47314
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2

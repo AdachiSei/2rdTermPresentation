@@ -9,8 +9,16 @@ using UnityEngine;
 public class PlayerBase : MonoBehaviour
 {
     [SerializeField]
+    [Header("ポーズマネージャー")]
+    PauseManager _pauseManager;
+
+    [SerializeField]
     [Header("プレイヤーのタイプ")]
     PlayerType _playerType;
+
+    [SerializeField]
+    [Header("パック")]
+    PackController _packController;
 
     [SerializeField]
     [Header("スピード")]
@@ -19,10 +27,6 @@ public class PlayerBase : MonoBehaviour
     [SerializeField]
     [Header("精密時のスピード")]
     float _slowSpeed = 3;
-
-    [SerializeField]
-    [Header("パック")]
-    PackController _packController;
 
     [SerializeField]
     [Header("プレイヤー1の定位置")]
@@ -48,8 +52,8 @@ public class PlayerBase : MonoBehaviour
     protected virtual void Awake()
     {
         _rb = GetComponent<Rigidbody>();
-        PauseManager.Instance.OnPause += OnPause;
-        PauseManager.Instance.OnResume += OnResume;
+        _pauseManager.OnPause += OnPause;
+        _pauseManager.OnResume += OnResume;
 
         switch(_playerType)
         {
@@ -73,7 +77,7 @@ public class PlayerBase : MonoBehaviour
 
     protected virtual void Update()
     {
-        if(_packController.gameObject.activeSelf == false)
+        if(_packController?.gameObject.activeSelf == false)
         {
             switch (_playerType)
             {

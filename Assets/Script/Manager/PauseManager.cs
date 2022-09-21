@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class PauseManager : SingletonMonoBehaviour<PauseManager>
+public class PauseManager : MonoBehaviour
 {
     public event Action OnPause;
     public event Action OnResume;
