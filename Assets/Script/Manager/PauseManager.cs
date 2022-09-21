@@ -18,12 +18,16 @@ public class PauseManager : MonoBehaviour
     Image _pausePanel;
 
     bool _isPause;
+    float _timer;
 
+    const float TWO_SECONDS = 2;
     const string CANCEL = "Cancel";
 
     void Update()
     {
-        if (Input.GetButtonDown(CANCEL) && _packController.gameObject.activeSelf)
+        _timer += Time.deltaTime;
+
+        if (Input.GetButtonDown(CANCEL) && _packController.gameObject.activeSelf && _timer >= TWO_SECONDS)
         {
             Pause();
         }
