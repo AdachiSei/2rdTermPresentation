@@ -20,7 +20,7 @@ public class StartManager : MonoBehaviour
 
     const int ONE = 1000;
     const string READY = "Ready...";
-    const string START = "Start!";
+    const string GO = "Go!";
 
     async void Awake()
     {
@@ -29,7 +29,7 @@ public class StartManager : MonoBehaviour
         _player2.enabled = false;
         _text.text = READY;
         await Task.Delay(ONE);
-        _text.text = START;
+        _text.text = GO;
         _player1.enabled = true;
         _player2.enabled = true;
         await Task.Delay(ONE);

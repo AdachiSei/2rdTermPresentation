@@ -20,14 +20,16 @@ public class PauseManager : MonoBehaviour
     bool _isPause;
     float _timer;
 
-    const float TWO_SECONDS = 2;
+    const float ONE_SECONDS = 1;
     const string CANCEL = "Cancel";
 
     void Update()
     {
         _timer += Time.deltaTime;
-
-        if (Input.GetButtonDown(CANCEL) && _packController.gameObject.activeSelf && _timer >= TWO_SECONDS)
+        bool isCancel = Input.GetButtonDown(CANCEL);
+        bool isPack = _packController.gameObject.activeSelf;
+        bool oneSecondLater = _timer >= ONE_SECONDS;
+        if (isCancel && isPack && oneSecondLater)
         {
             Pause();
         }
