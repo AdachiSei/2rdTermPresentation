@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
-/// Playerを制御する基底クラス
+/// Playerを制御するクラス
 /// </summary>
 [RequireComponent(typeof(Rigidbody))]
-public class PlayerBase : MonoBehaviour
+public class PlayerController : MonoBehaviour
 {
     [SerializeField]
     [Header("ポーズマネージャー")]
@@ -52,8 +52,12 @@ public class PlayerBase : MonoBehaviour
     protected virtual void Awake()
     {
         _rb = GetComponent<Rigidbody>();
-        _pauseManager.OnPause += OnPause;
-        _pauseManager.OnResume += OnResume;
+
+        if (_pauseManager)
+        {
+            _pauseManager.OnPause += OnPause;
+            _pauseManager.OnResume += OnResume;
+        }
 
         switch(_playerType)
         {
@@ -77,7 +81,7 @@ public class PlayerBase : MonoBehaviour
 
     protected virtual void Update()
     {
-        if(_packController?.gameObject.activeSelf == false)
+        if(_packController.gameObject.activeSelf == false)
         {
             switch (_playerType)
             {

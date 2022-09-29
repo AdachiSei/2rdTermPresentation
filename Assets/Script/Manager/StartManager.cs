@@ -8,11 +8,11 @@ public class StartManager : MonoBehaviour
 {
     [SerializeField]
     [Header("プレイヤー1")]
-    PlayerBase _player1;
+    PlayerController _player1;
 
     [SerializeField]
     [Header("プレイヤー2")]
-    PlayerBase _player2;
+    PlayerController _player2;
 
     [SerializeField]
     [Header("最初のテキスト")]

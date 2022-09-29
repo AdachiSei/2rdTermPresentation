@@ -46,6 +46,9 @@ public class BattleModel : MonoBehaviour
         }
     }
 
+    public int ChangeWinPoint(int point) =>
+        _winPoint = point;
+
     void OnDestroy()
     {
         _player1Point.Dispose();

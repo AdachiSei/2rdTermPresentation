@@ -34,8 +34,12 @@ public class PackController : MonoBehaviour
     {
         _rb = GetComponent<Rigidbody>();
         _collider = GetComponent<Collider>();
-        _pauseManager.OnPause += OnPause;
-        _pauseManager.OnResume += OnResume;
+
+        if(_pauseManager)
+        {
+            _pauseManager.OnPause += OnPause;
+            _pauseManager.OnResume += OnResume;
+        }
     }
 
     async private void OnEnable()
